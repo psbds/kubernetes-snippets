@@ -2,18 +2,18 @@ set -e
 
 # Fist, run 'az login' to login into your account
 # Then, use 'az account set --subscription <<Subscription>>' to select your subscription
-RESOURCE_GROUP_NAME="padasil-aks-demo4"
-AKS_NAME="padasil-aks-demo4"
-VNET_NAME="padasil-aks-vnet-demo4"
+RESOURCE_GROUP_NAME="padasil-aks-demo5"
+AKS_NAME="padasil-aks-demo5"
+VNET_NAME="padasil-aks-vnet-demo5"
 LOCATION="eastus2"
 
 MIN_NODES=1
 MAX_NODES=2
 
-AAD_SERVER_APPLICATION_ID=""
-AAD_SERVER_APPLICATION_SECRET=""
-AAD_CLIENT_APPLICATION_ID=""
-AAD_TENANT_ID=""
+AAD_SERVER_APPLICATION_ID="c3fb91af-4caf-4b13-b6b8-20d391c1a1e3"
+AAD_SERVER_APPLICATION_SECRET="7bbd2d46-5963-44aa-b835-6751d655660a"
+AAD_CLIENT_APPLICATION_ID="75079805-9e7d-47fb-a8e9-df132c9c0582"
+AAD_TENANT_ID="1182686f-6b15-4924-89a9-7b69b6842fd1"
 
 # Choose a Network Plugin: https://docs.microsoft.com/en-us/azure/aks/concepts-network#azure-virtual-networks
 # Azure CNI: https://docs.microsoft.com/en-us/azure/aks/configure-azure-cni
