@@ -107,6 +107,8 @@ COMMAND=" $COMMAND --service-cidr 10.0.0.0/16 --dns-service-ip 10.0.0.10 --docke
 # Generate SSH Keys for the cluster VMs
 COMMAND=" $COMMAND --generate-ssh-keys"
 
+# Add any Tag you want
+COMMAND=" $COMMAND --tags source=kubernetes-snippets"
 
 
 $COMMAND
