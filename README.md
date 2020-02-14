@@ -51,3 +51,5 @@ And the Dockerfile for the custom image, right here: https://github.com/psbds/de
 
 ## Summary
 
+* [Cluster Creation Script](https://github.com/psbds/kubernetes-snippets/tree/master/create-cluster)
+* [Kubernetes Permissions](https://github.com/psbds/kubernetes-snippets/tree/master/kubernetes-permissions)
