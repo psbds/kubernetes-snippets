@@ -1,7 +1,7 @@
 ## Create Azure Virtual Network
 az network vnet create \
-    --resource-group $RESOURCE_GROUP_NAME \
-    --name $VNET_NAME \
+    --resource-group $RESOURCE_GROUP_NAME'' \
+    --name $VNET_NAME'' \
     --address-prefixes 10.0.0.0/8 \
     --subnet-name defaultAKS \
     --subnet-prefix 10.240.0.0/16

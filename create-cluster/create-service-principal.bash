@@ -10,4 +10,4 @@ sleep 15
 
 
 # Assign the service principal Contributor permissions to the virtual network resource
-az role assignment create --assignee $SP_ID --scope $VNET_ID --role Contributor
+az role assignment create --assignee $SP_ID --scope $VNET_ID'' --role Contributor

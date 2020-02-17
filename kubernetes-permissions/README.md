@@ -12,7 +12,7 @@ Without the AAD integration, all users with owner/contributor permission to the 
 
 To manage user permission using email or AAD groups, you need to setup [AAD Integration](https://docs.microsoft.com/en-us/azure/aks/kubernetes-service-principal).
 
-I've also created a helper script to create the AAD Integration [here](https://github.com/psbds/kubernetes-snippets/blob/master/create-cluster/setup-aad-connection.bash)
+I've also created a helper script to create the AAD Integration [here](https://github.com/psbds/kubernetes-snippets/blob/master/kubernetes-permissions/setup-aad-connection.bash)
 
 **Not that to create this integration, you need admin rights in Azure Active Directory.**
 

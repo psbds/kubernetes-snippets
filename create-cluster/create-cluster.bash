@@ -29,13 +29,13 @@ az group create --name $RESOURCE_GROUP_NAME --location $LOCATION
 # In: $VNET_NAME
 # Out: $VNET_ID
 # Out: $SUBNET_ID
-source create-vnet.bash
+source ./create-vnet.bash
 
 ## Create Service Principal to Manage Cluster Resources
 # In: $VNET_ID 
 # Out: SP_ID
 # Out: SP_PASSWORD
-source create-service-principal.bash
+source ./create-service-principal.bash
 
 # Assign the service principal Contributor permissions to the virtual network resource
 az role assignment create --assignee $SP_ID --scope $VNET_ID --role Contributor
@@ -113,4 +113,5 @@ COMMAND=" $COMMAND --tags source=kubernetes-snippets"
 
 $COMMAND
 
-echo "To connect to your cluster, run az aks get-credentials --resource-group $RESOURCE_GROUP_NAME --name $AKS_NAME"
+echo "To connect to your cluster as admin, run az aks get-credentials --resource-group $RESOURCE_GROUP_NAME --name $AKS_NAME --admin"
+echo "To connect to your cluster as user, run az aks get-credentials --resource-group $RESOURCE_GROUP_NAME --name $AKS_NAME"
