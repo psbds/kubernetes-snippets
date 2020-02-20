@@ -3,8 +3,8 @@
 The easist way to run the scripts from this repo is using VSCode and the Remote Containers Extension (BEST EXTENSION EVER)
 
 ## Requirements
-<img src="https://www.mundodocker.com.br/wp-content/uploads/2015/06/docker_facebook_share.png" height="100px" />
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/1024px-Visual_Studio_Code_1.35_icon.svg.png" height="100px">
+<img src="https://github.com/psbds/kubernetes-snippets/raw/master/doc-images/docker.png" height="100px" />
+<img src="https://github.com/psbds/kubernetes-snippets/raw/master/doc-images/vscode.png" height="100px" />
 
 * Docker Installed and Running (and set to use Linux Containers)
   * Install Docker on Windows (https://docs.docker.com/docker-for-windows/install/)
