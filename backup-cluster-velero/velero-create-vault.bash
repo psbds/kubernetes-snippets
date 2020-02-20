@@ -1,8 +1,19 @@
+# This Script creates an Storage Account to serve as vault for velero Backup
+# You can check the detailed documentation here: https://github.com/vmware-tanzu/velero-plugin-for-microsoft-azure
 set -e
 
+# Parameters
+
+## The Resource Group where the Storage Account will be created
 AZURE_BACKUP_RESOURCE_GROUP="padasil-aks-backup"
+
+## The Subscription where the Storage Account will be created
 AZURE_BACKUP_SUBSCRIPTION_ID=""
+
+## The name of the Container inside of the Blob Storage, where the Backups will be stored
 BLOB_CONTAINER="velero-backup"
+
+## The Location where the storage account will store the backups, use GRS for GRS Storage
 LOCATION="southcentralus"
 
 az group create -n $AZURE_BACKUP_RESOURCE_GROUP --location southcentralus --subscription $AZURE_BACKUP_SUBSCRIPTION_ID
