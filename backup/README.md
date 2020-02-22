@@ -53,7 +53,6 @@ To install velero, you can use the script listed **[here](https://github.com/psb
 
 ### Backup
 
-
 #### Check Available Commands and Parameters
 ```velero backup --help```
 
@@ -80,3 +79,48 @@ Example: ```velero backup create backup1 --include-namespaces default,mynamespac
 #### Manually with Cluster Resources (Ex: ClusteRole and ClusterRoleBindings)
 
 Example: ```velero backup create backup1 --include-cluster-resources=true```
+
+### Scheduled Backup
+
+#### Check Available Commands and Parameters
+```velero backup --help```
+
+* Create a schedule: ```velero schedule create --help```
+
+* Delete schedule: ```velero schedule delete  --help```
+
+* Describe schedule: ```velero schedule describe  --help```
+
+* Get schedule: ```velero schedule get --help```
+
+#### Schedule Backup for every six hours
+
+Example: ```velero create schedule backup-schedule --schedule="0 */6 * * *"```
+
+#### Schedule Backup for every six hours for specifc namespaces
+
+Example: ```velero create schedule backup-schedule --schedule="0 */6 * * *" --include-namespaces default,mynamespace```
+
+#### Schedule Backup for every six hours with Cluster Resources (Ex: ClusteRole and ClusterRoleBindings)
+
+Example: ```velero create schedule backup-schedule --schedule="0 */6 * * *" --include-cluster-resources=true```
+
+
+### Best Practices around Restoring Scheduled Backups
+
+Is a good practice to set the backup vault to readonly before you restore from a scheduled backup, this prevents objects from being overriden while the restore is happening.
+
+```
+kubectl patch backupstoragelocation default \
+    --namespace velero \
+    --type merge \
+    --patch '{"spec":{"accessMode":"ReadOnly"}}'
+
+```
+After the restore is succeeded you can patch the vault backp to ReadWrite
+```
+kubectl patch backupstoragelocation default \
+       --namespace velero \
+       --type merge \
+       --patch '{"spec":{"accessMode":"ReadWrite"}}'
+```
