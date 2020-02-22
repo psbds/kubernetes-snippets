@@ -14,3 +14,11 @@ Feel free to create an issue or PR to contribute, and why not have a chat on [Li
 * [Cluster Creation Script](https://github.com/psbds/kubernetes-snippets/tree/master/create-cluster)
 * [Kubernetes Permissions](https://github.com/psbds/kubernetes-snippets/tree/master/kubernetes-permissions)
 * [Kubernetes Backup & Migration with Velero](https://github.com/psbds/kubernetes-snippets/tree/master/backup)
+
+## Coming soon
+
+* Istio Setup
+* Kured Setup
+* WeaveScope Setup
+* Azure DevOps Pipelines Templates
+* Terraform Templates
