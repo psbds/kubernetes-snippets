@@ -51,9 +51,9 @@ To install velero, you can use the script listed **[here](https://github.com/psb
 
 ## Velero Basic Commands
 
-### Backup
+## Backup
 
-#### Check Available Commands and Parameters
+### Check Available Commands and Parameters
 ```velero backup --help```
 
 * Create a backup: ```velero backup create --help```
@@ -68,22 +68,22 @@ To install velero, you can use the script listed **[here](https://github.com/psb
 
 * Get backup logs: ```velero backup logs --help```
 
-#### Manually Backup the entire cluster
+### Manually Backup the entire cluster
 
 Example: ```velero backup create backup1```
 
-#### Manually Backup specifc namespaces
+### Manually Backup specifc namespaces
 
 Example: ```velero backup create backup1 --include-namespaces default,mynamespace```
 
-#### Manually with Cluster Resources (Ex: ClusteRole and ClusterRoleBindings)
+### Manually with Cluster Resources (Ex: ClusteRole and ClusterRoleBindings)
 
 Example: ```velero backup create backup1 --include-cluster-resources=true```
 
-### Scheduled Backup
+## Scheduled Backup
 
-#### Check Available Commands and Parameters
-```velero backup --help```
+### Check Available Commands and Parameters
+```velero schedule --help```
 
 * Create a schedule: ```velero schedule create --help```
 
@@ -93,20 +93,46 @@ Example: ```velero backup create backup1 --include-cluster-resources=true```
 
 * Get schedule: ```velero schedule get --help```
 
-#### Schedule Backup for every six hours
+### Schedule Backup for every six hours
 
 Example: ```velero create schedule backup-schedule --schedule="0 */6 * * *"```
 
-#### Schedule Backup for every six hours for specifc namespaces
+### Schedule Backup for every six hours for specifc namespaces
 
 Example: ```velero create schedule backup-schedule --schedule="0 */6 * * *" --include-namespaces default,mynamespace```
 
-#### Schedule Backup for every six hours with Cluster Resources (Ex: ClusteRole and ClusterRoleBindings)
+### Schedule Backup for every six hours with Cluster Resources (Ex: ClusteRole and ClusterRoleBindings)
 
 Example: ```velero create schedule backup-schedule --schedule="0 */6 * * *" --include-cluster-resources=true```
 
+## Restore
 
-### Best Practices around Restoring Scheduled Backups
+### Check Available Commands and Parameters
+```velero restore --help```
+
+* Create a restore: ```velero restore create --help```
+
+* Delete restore: ```velero restore delete  --help```
+
+* Describe restore: ```velero restore describe  --help```
+
+* Get restore: ```velero restore get --help```
+
+* Get restore logs: ```velero restore logs --help```
+
+### Restore from Backup
+
+Example: ```velero restore create restore1 --from-backup backup1```
+
+### Restore from the last sucessfull backup from a backp schedule
+
+Example: ```velero restore create restore-schedule1 --from-schedule backup-schedule```
+
+### Restore from backup to a different namespace
+Example: ```velero restore create restore2 --namespace-mappings default:new-namespace --from-backup backup1```
+
+
+## Best Practices around Restoring Scheduled Backups
 
 Is a good practice to set the backup vault to readonly before you restore from a scheduled backup, this prevents objects from being overriden while the restore is happening.
 
@@ -115,7 +141,6 @@ kubectl patch backupstoragelocation default \
     --namespace velero \
     --type merge \
     --patch '{"spec":{"accessMode":"ReadOnly"}}'
-
 ```
 After the restore is succeeded you can patch the vault backp to ReadWrite
 ```
