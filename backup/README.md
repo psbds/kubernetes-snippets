@@ -124,7 +124,7 @@ Example: ```velero create schedule backup-schedule --schedule="0 */6 * * *" --in
 
 Example: ```velero restore create restore1 --from-backup backup1```
 
-### Restore from the last sucessfull backup from a backp schedule
+### Restore from the last sucessfull backup from a backup schedule
 
 Example: ```velero restore create restore-schedule1 --from-schedule backup-schedule```
 
