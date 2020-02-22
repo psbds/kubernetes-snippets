@@ -1,6 +1,17 @@
 # Running the Scripts from this Repository
 
-The easist way to run the scripts from this repo is using VSCode and the Remote Containers Extension (BEST EXTENSION EVER)
+There are two easy  ways to run the scripts from this repo.
+
+## Using GitPod
+
+GitPod is an awesome website which provides you a free container a editor in your browser
+
+I've configured a custom docker image do run the scripts from this help, you can open this repository with GitPod in the link below.
+
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/psbds/kubernetes-snippets) 
+
+
+## Using VSCode and the Remote Containers Extension (BEST EXTENSION EVER)
 
 ## Requirements
 <img src="https://github.com/psbds/kubernetes-snippets/raw/master/doc-images/docker.png" height="100px" />
