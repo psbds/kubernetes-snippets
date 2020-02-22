@@ -10,8 +10,6 @@ Sources:
 * [Velero Docs](https://velero.io/docs/v1.2.0/)
 * [Velero Plugin for Azure](https://github.com/vmware-tanzu/velero-plugin-for-microsoft-azure)
 
-
-
 ## Setting up Backup Vault
 
 The first step when configuring backup with velero, is to create the vault where the backups will be stored.
@@ -22,14 +20,63 @@ To create the vault, you can use the script listed **[here](https://github.com/p
 
 This script will require the following paremeters:
 
-| Paremeter 	| type 	| default 	| Description 	|
+| Paremeter 	| Type 	| Default 	| Description 	|
 |-----------	|------	|---------	|-------------	|
-| AZURE_BACKUP_SUBSCRIPTION_ID          	| string      	|  empty       	| The subscription where the storge account for backup will be created, currently, this script doesn't support to backup between subscriptions that are on different Azure AD tenants            	|
-| AZURE_BACKUP_RESOURCE_GROUP          	| string     	| ```backup```         	| The resource group where the storage account for backup will be created             	|
-| BLOB_CONTAINER           	| string      	| ```velero-backup```         	| The name of the container where the backup will be stored             	|
-| LOCATION          	| string      	| ```southcentralus```         	| Region where the backup will be stored, to use GRS storage, just set the variable to ```GRS```             	|
-|           	|      	|         	|             	|
-|           	|      	|         	|             	|
-|           	|      	|         	|             	|
-|           	|      	|         	|             	|
-|           	|      	|         	|             	|
+| AZURE_BACKUP_SUBSCRIPTION_ID          	| string      	|  empty       	| The subscription where the storge account for backup will be created, currently, this script doesn't support to backup between subscriptions that are on different Azure AD tenants.            	|
+| AZURE_BACKUP_RESOURCE_GROUP          	| string     	| ```backup```         	| The resource group where the storage account for backup will be created.             	|
+| BLOB_CONTAINER           	| string      	| ```velero-backup```         	| The name of the container where the backup will be stored.             	|
+| LOCATION          	| string      	| ```southcentralus```         	| Region where the backup will be stored, to use GRS storage, just set the variable to ```GRS```.             	|
+| AZURE_STORAGE_ACCOUNT_ID           	| string      	| randomstring         	| The name of the storage account resource that will be created.             	|
+
+
+## Setup AKS Cluster to use the Vault
+
+The next step, is to install velero in the cluster with the configuration pointing to the backup vault.
+
+I will run those steps in two situations:
+1. You already have a cluster and want do to backups to the vault
+2. You created a new cluster and want to restore backups from the vault 
+
+To install velero, you can use the script listed **[here](https://github.com/psbds/kubernetes-snippets/blob/master/backup/velero-install.bash)**
+
+| Paremeter 	| Type 	| Default 	| Description 	|
+|-----------	|------	|---------	|-------------	|
+| AZURE_BACKUP_SUBSCRIPTION               | string       | empty           | The subscription where the Storage Account for backup was created.               |
+| AZURE_BACKUP_RESOURCE_GROUP               | string      | empty           | The resource group where the Storage Account for backup was created.               |
+| AZURE_BACKUP_STORAGE_ACCOUNT_ID               | string      | empty           | The name of the Storage Account created for backup.              |
+| AZURE_BACKUP_CONTAINER               | string       | ```velero-backup```           | The name of the container created for backup.               |
+| AZURE_AKS_SUBSCRIPTION               | string       | empty           | The name of the subcription that the AKS resource is created.              |
+| AZURE_AKS_MC_RESOURCE_GROUP               | string       | empty           | The name of the resource group where the AKS components are created. Note: This is not the resource group of the AKS resource itself, it's the resource group where AKS creates the virtual machines, load balancers, IPs, etc. Its name Usually start with MC_.    |
+|               |       |           |               |
+
+## Velero Basic Commands
+
+### Backup
+
+
+#### Check Available Commands and Parameters
+```velero backup --help```
+
+* Create a backup: ```velero backup create --help```
+
+* Delete backups: ```velero backup delete  --help```
+
+* Describe backups: ```velero backup describe  --help```
+
+* Download a backup: ```velero backup download  --help```
+
+* Get backups: ```velero backup get --help```
+
+* Get backup logs: ```velero backup logs --help```
+
+#### Manually Backup the entire cluster
+
+Example: ```velero backup create backup1```
+
+#### Manually Backup specifc namespaces
+
+Example: ```velero backup create backup1 --include-namespaces default,mynamespace```
+
+#### Manually with Cluster Resources (Ex: ClusteRole and ClusterRoleBindings)
+
+Example: ```velero backup create backup1 --include-cluster-resources=true```
