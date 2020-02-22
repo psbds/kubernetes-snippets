@@ -5,11 +5,11 @@ set -e
 
 # Parameters
 
-## The Resource Group where the Storage Account will be created
-AZURE_BACKUP_RESOURCE_GROUP="padasil-aks-backup"
-
 ## The Subscription where the Storage Account will be created
 AZURE_BACKUP_SUBSCRIPTION_ID=""
+
+## The Resource Group where the Storage Account will be created
+AZURE_BACKUP_RESOURCE_GROUP="backup"
 
 ## The name of the Container inside of the Blob Storage, where the Backups will be stored
 BLOB_CONTAINER="velero-backup"
@@ -46,7 +46,6 @@ az storage account create \
         --kind BlobStorage \
         --access-tier Hot
 
-echo $STORAGE_KEY
 # Create the container inside the storage account to store backups
 az storage container create -n $BLOB_CONTAINER --public-access off --account-name $AZURE_STORAGE_ACCOUNT_ID --subscription $AZURE_BACKUP_SUBSCRIPTION_ID
 

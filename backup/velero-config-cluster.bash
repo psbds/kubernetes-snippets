@@ -1,3 +1,6 @@
+# Authors: Paulo Baima & Vinicius Batista
+# This Script configures a AKS Cluster to use velero to backup the cluster into the vault created on the 'velero-create-vault.bash' script
+# See also: https://github.com/psbds/kubernetes-snippets/blob/master/backup/velero-create-vault.bash
 set -e
 
 AZURE_BACKUP_SUBSCRIPTION=""
@@ -31,3 +34,5 @@ velero install \
     --secret-file ./credentials-velero \
     --backup-location-config resourceGroup=$AZURE_BACKUP_RESOURCE_GROUP,storageAccount=$AZURE_BACKUP_STORAGE_ACCOUNT_ID,subscriptionId=$AZURE_BACKUP_SUBSCRIPTION \
     --snapshot-location-config apiTimeout=5m,resourceGroup=$AZURE_BACKUP_RESOURCE_GROUP,subscriptionId=$AZURE_BACKUP_SUBSCRIPTION
+
+rm credentials-velero
