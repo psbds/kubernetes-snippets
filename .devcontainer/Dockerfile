@@ -1,1 +1,1 @@
-FROM psbds/dev-container-aks:v1.1.2
+FROM psbds/dev-container-aks:v1.1.3
