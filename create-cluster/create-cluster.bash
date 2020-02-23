@@ -6,6 +6,9 @@ set -e
 
 # Parameters
 
+## Subscription where the AKS Service will be created
+SUBSCRIPTION_ID=""
+
 ## The Resource Group where the AKS Service will be created
 RESOURCE_GROUP_NAME="padasil-aks-demo7"
 
@@ -47,9 +50,10 @@ NETWORK_PLUGIN="azure" # or kubenet
 # End of Parameters
 
 ## Create Azure Resource Group
-az group create --name $RESOURCE_GROUP_NAME --location $LOCATION
+az group create --name $RESOURCE_GROUP_NAME --location $LOCATION --subscription $SUBSCRIPTION_ID
 
 ## Create the Virtual Network
+# In: $SUBSCRIPTION_ID
 # In: $RESOURCE_GROUP_NAME
 # In: $VNET_NAME
 # Out: $VNET_ID
@@ -57,6 +61,7 @@ az group create --name $RESOURCE_GROUP_NAME --location $LOCATION
 source ./create-vnet.bash
 
 ## Create Service Principal to Manage Cluster Resources
+# In: $SUBSCRIPTION_ID
 # In: $VNET_ID 
 # Out: SP_ID
 # Out: SP_PASSWORD
