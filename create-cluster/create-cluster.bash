@@ -1,15 +1,39 @@
+#/bin/bash
+# Author: Paulo Baima
+# This Script creates a AKS Cluster with the defined parameters
+# Fist, run 'az login' to login into your account
 set -e
 
-# Fist, run 'az login' to login into your account
-# Then, use 'az account set --subscription <<Subscription>>' to select your subscription
-RESOURCE_GROUP_NAME="padasil-aks-demo5"
-AKS_NAME="padasil-aks-demo5"
-VNET_NAME="padasil-aks-vnet-demo5"
+# Parameters
+
+## The Resource Group where the AKS Service will be created
+RESOURCE_GROUP_NAME="padasil-aks-demo7"
+
+## The Name of the AKS service that will be created
+AKS_NAME="padasil-aks-demo7"
+
+## The Name of the VNET that will be created
+VNET_NAME="padasil-aks-vnet-demo7"
+
+## The location where the VNET, RG and AKS service will be created
 LOCATION="eastus2"
 
+## The Minimum and maximum number of nodes that the cluster will be created and auto-scaled to
 MIN_NODES=1
 MAX_NODES=2
 
+## Kubernetes Version
+KUBERNETES_VERSION="1.16.4"
+
+## VM Size & Type
+VM_SIZE="Standard_DS2_v2"
+
+## Custom Name for the Resource Group created to store aks resources (vmss, load balancers, ips, etc.)
+CUSTOM_RESOURCE_GROUP=""
+
+
+## The Credentials for integration with Azure Active Directory
+## See: https://github.com/psbds/kubernetes-snippets/tree/master/kubernetes-permissions
 AAD_SERVER_APPLICATION_ID=""
 AAD_SERVER_APPLICATION_SECRET=""
 AAD_CLIENT_APPLICATION_ID=""
@@ -20,6 +44,7 @@ AAD_TENANT_ID=""
 # Kubenet: https://docs.microsoft.com/en-us/azure/aks/configure-kubenet
 NETWORK_PLUGIN="azure" # or kubenet
 
+# End of Parameters
 
 ## Create Azure Resource Group
 az group create --name $RESOURCE_GROUP_NAME --location $LOCATION
@@ -46,6 +71,12 @@ COMMAND="az aks create"
 # Resource Group, Resource Name and Location, Common Azure Stuff
 COMMAND="$COMMAND --name $AKS_NAME --resource-group $RESOURCE_GROUP_NAME --location $LOCATION"
 
+# Set Custom Resource Group for AKS Resources
+if [ -n "$CUSTOM_RESOURCE_GROUP" ]
+then    
+    COMMAND=" $COMMAND --node-resource-group $CUSTOM_RESOURCE_GROUP"
+fi
+
 # Set the Subnet the cluter will be placed
 COMMAND=" $COMMAND --vnet-subnet-id $SUBNET_ID"
 
@@ -53,13 +84,13 @@ COMMAND=" $COMMAND --vnet-subnet-id $SUBNET_ID"
 COMMAND=" $COMMAND --service-principal $SP_ID --client-secret $SP_PASSWORD"
 
 # Set the number of nodes the cluster will start with
-COMMAND=" $COMMAND --node-count 1"
+COMMAND=" $COMMAND --node-count $MIN_NODES"
 
 # Set Kubernetes Version
-COMMAND=" $COMMAND --kubernetes-version 1.16.4"
+COMMAND=" $COMMAND --kubernetes-version $KUBERNETES_VERSION"
 
 # Set VM Size
-COMMAND=" $COMMAND --node-vm-size Standard_DS2_v2"
+COMMAND=" $COMMAND --node-vm-size $VM_SIZE"
 
 # Set OS Disk Size, please check if your VM can handle the required IOPS
 COMMAND=" $COMMAND --node-osdisk-size 100"
@@ -84,7 +115,7 @@ COMMAND=" $COMMAND  --enable-cluster-autoscaler --min-count $MIN_NODES --max-cou
 COMMAND=" $COMMAND --enable-addons monitoring"
 
 # Lets set the Network Plugin
-if [ $NETWORK_PLUGIN = "azure" ]
+if [ "$NETWORK_PLUGIN" = "azure" ]
 then
     COMMAND=" $COMMAND --network-plugin azure"
 else
@@ -92,7 +123,7 @@ else
 fi
 
 # Lets configure the Azure AD Integration
-if [ -n $AAD_SERVER_APPLICATION_ID -a -n $AAD_SERVER_APPLICATION_SECRET -a -n $AAD_CLIENT_APPLICATION_ID -a -n $AAD_TENANT_ID ]
+if [ -n "$AAD_SERVER_APPLICATION_ID" -a -n "$AAD_SERVER_APPLICATION_SECRET" -a -n "$AAD_CLIENT_APPLICATION_ID" -a -n "$AAD_TENANT_ID" ]
 then    
     COMMAND=" $COMMAND --aad-server-app-id $AAD_SERVER_APPLICATION_ID --aad-server-app-secret $AAD_SERVER_APPLICATION_SECRET --aad-client-app-id $AAD_CLIENT_APPLICATION_ID --aad-tenant-id $AAD_TENANT_ID"
 fi
@@ -109,7 +140,7 @@ COMMAND=" $COMMAND --generate-ssh-keys"
 
 # Add any Tag you want
 COMMAND=" $COMMAND --tags source=kubernetes-snippets"
-
+COMMAND=" $COMMAND --nodepool-tags nodepool=kubernetes-snippets-default"
 
 $COMMAND
 
