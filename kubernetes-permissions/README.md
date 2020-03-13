@@ -82,3 +82,27 @@ subjects:
   kind: Group
   name: <<AAD_Group_ID>>
 ```
+
+## Checking Permissions
+
+As Cluster admin you can use the impersonation feature on Kubernetes to check if an user, group or service account has permission to a particular resource
+
+Examples:
+
+#### To Check access if a service account has permissions to execute `get pods`
+```
+#kubectl auth can-i --as system:serviceaccount:(NAMESPACE):(SERVICEACCOUNT) get pods
+kubectl auth can-i --as system:serviceaccount:default:my-service-account get pods
+```
+
+#### To Check access if a user  has permissions to execute `get pods`
+```
+#kubectl auth can-i --as <userobjectid or email> get pods
+kubectl auth can-i --as admin@contoso.com get pods
+```
+
+#### To Check access if a group has permissions to execute `get pods`
+```
+#kubectl auth can-i --as-group <<GROUP_OBJECT_ID>> --as-group=system:authenticated --as anyone get pods   
+kubectl auth can-i --as-group myaadgroup --as-group=system:authenticated --as anyone get pods 
+```
