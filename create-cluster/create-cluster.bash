@@ -10,13 +10,13 @@ set -e
 SUBSCRIPTION_ID=""
 
 ## The Resource Group where the AKS Service will be created
-RESOURCE_GROUP_NAME="padasil-aks-demo7"
+RESOURCE_GROUP_NAME="padasil-aks-demo"
 
 ## The Name of the AKS service that will be created
-AKS_NAME="padasil-aks-demo7"
+AKS_NAME="padasil-aks-demo"
 
 ## The Name of the VNET that will be created
-VNET_NAME="padasil-aks-vnet-demo7"
+VNET_NAME="padasil-aks-vnet-demo"
 
 ## The location where the VNET, RG and AKS service will be created
 LOCATION="eastus2"
