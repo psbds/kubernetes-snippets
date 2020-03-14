@@ -4,7 +4,9 @@ On a AAD Integrated cluster, it's recommended to configure the service connectio
 
 To do that you can follow those steps:
 
-## Creating the Permissions
+## Setting up Service Connection (Manually)
+
+### Creating the Permissions
 Create a role with the permissions needed for Azure DevOps to do the deployment, you can refine to have a more granular set of permissions, in this example we're giving full permissions to the service account using the Cluster Role below
 
 ```
@@ -31,7 +33,6 @@ subjects:
     namespace: az-devops
 ```
 
-## Setting up Service Connection (Manually)
 
 To setup on Azure DevOps, got to your Project Settings and then Service Connections. Create a new Service Connection and select the type = Kubernetes.
 
@@ -48,10 +49,25 @@ echo $(kubectl get secret $SECRET_NAME -n az-devops -o json)
 ```
 ## Setting up Service Connection (with Script)
 
-You can also use the script of the `setup-service-connection.bash` file, to create the service endpoint through the Azure DevOps REST API.
+You can also use the script of the `setup-service-connection.bash` file, to create the service connection through the Azure DevOps REST API.
+
+### Usage
+
+```
+./setup-service-connection.bash -o contosoOrganization -p constosoProject -pat patToken -u user
+```
+
+### Parameters
+
+| Paremeter 	                | Type 	    | Default 	| Required 	| Description 	|
+|-----------	                |------	    |---------	|--------	|-------------	|
+| -o, --organization            | string    | empty     | yes       | The Azure DevOps organization where the service connection will be created.            	|
+| -p, --project                 | string    | empty     | yes       | The Azure DevOps project where the service connection will be bound.                    |
+| -pat, --personal-access-token | string    | empty     | yes       | The Personal Access Token of an user with access to create service connection          |
+| -u, --user                    | string    | empty     | yes       | The email of the user owner of the PAT token                                          |
 
 ## Setting up Service Connection (with Azure Pipelines)
 
 You can setup a pipeline on Azure DevOps using the file `setup-service-connection-pipeline.yaml` file.
 
-This is useful for cases where you create your clusters using a pipeline, in this way, you can also create the service endpoint altogether.
+This is useful for cases where you create your clusters using a pipeline, in this way, you can also create the service connection altogether.
