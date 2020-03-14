@@ -49,3 +49,9 @@ echo $(kubectl get secret $SECRET_NAME -n az-devops -o json)
 ## Setting up Service Connection (with Script)
 
 You can also use the script of the `setup-service-connection.bash` file, to create the service endpoint through the Azure DevOps REST API.
+
+## Setting up Service Connection (with Azure Pipelines)
+
+You can setup a pipeline on Azure DevOps using the file `setup-service-connection-pipeline.yaml` file.
+
+This is useful for cases where you create your clusters using a pipeline, in this way, you can also create the service endpoint altogether.
