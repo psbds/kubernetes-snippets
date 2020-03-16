@@ -49,22 +49,9 @@ echo $(kubectl get secret $SECRET_NAME -n az-devops -o json)
 ```
 ## Setting up Service Connection (with Kubernetes Snippets CLI)
 
-You can also use the cli provided in this repo tocreate the service connection through the Azure DevOps REST API.
+You can also use the cli provided in this repo to create the service connection through the Azure DevOps REST API.
 
-### Usage
-
-```
-akssnippets devops create-service-account -o contosoOrganization -p constosoProject -pat patToken -u user
-```
-
-### Parameters
-
-| Paremeter 	                | Type 	    | Default 	| Required 	| Description 	|
-|-----------	                |------	    |---------	|--------	|-------------	|
-| -o, --organization            | string    | empty     | yes       | The Azure DevOps organization where the service connection will be created.            	|
-| -p, --project                 | string    | empty     | yes       | The Azure DevOps project where the service connection will be bound.                      |
-| -pat, --personal-access-token | string    | empty     | yes       | The Personal Access Token of an user with access to create service connection.            |
-| -u, --user                    | string    | empty     | yes       | The email of the user owner of the PAT token.                                             |
+[Instructions Here](https://github.com/psbds/kubernetes-snippets/tree/master/cli/devops/create-service-connection) 
 
 ## Setting up Service Connection (with Azure Pipelines)
 

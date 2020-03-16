@@ -17,7 +17,7 @@ usage(){
         -pat,   --personal-access-token  [Required]     The Personal Access Token of an user with access to create service connection.
         -u,     --user                   [Required]     The email of the user owner of the PAT token.   
         -h,     --help                                  Show this message and exit.
-        -v,     --verbose                               Increase logging verbosity
+        -v,     --verbose                               Increase logging verbosity.
     '
     exit
 }
