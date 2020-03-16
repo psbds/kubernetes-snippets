@@ -1,22 +1,15 @@
 #/bin/bash
 # Author: Paulo Baima
 # Source: https://github.com/psbds/kubernetes-snippets
+set -e
 
-while [ "$1" != "" ]; do
-    case $1 in
-        -o | --organization )               shift && ORGANIZATION_NAME=$1
-                                            ;;
-        -p | --project )                    shift && PROJECT_NAME=$1
-                                            ;;
-        -pat | --personal-access-token )    shift && PERSONAL_ACCESS_TOKEN=$1
-                                            ;;
-        -u | --user )                       shift && USER=$1
-        ;;
-    esac
-    shift
-done
+# Loading an Validating Args
+DIR="${BASH_SOURCE%/*}"
+if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
+source "$DIR/arguments.bash" 
 
 create_kubernetes_roles(){
+  printInfo "1 - Creating Kubernetes Cluster Roles and Cluster Role Bindings\n" $VERBOSE
 cat <<EOF | kubectl apply -f -
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
@@ -43,12 +36,26 @@ EOF
 }
 
 create_service_account(){
-    # Create Kubernetes Namespace and Service Account
-    kubectl create namespace az-devops
-    kubectl create serviceaccount az-devops -n az-devops
+    printInfo "2 - Creating Kubernetes Namespace and Service Account.\n" $VERBOSE
+    if [ -z "$(kubectl get namespace az-devops -o name --ignore-not-found)" ]
+    then
+        printInfo "Creating namespace az-devops - " $VERBOSE
+        kubectl create namespace az-devops3
+    else
+        printInfo "Namespace az-devops already exists. \n" $VERBOSE
+    fi
+    
+    if [ -z "$(kubectl get serviceaccount az-devops -n az-devops -o name --ignore-not-found)" ]
+    then
+        printInfo "Creating Service Account az-devops - " $VERBOSE
+        kubectl create serviceaccount az-devops -n az-devops
+    else
+        printInfo "Service Account az-devops already exists. \n" $VERBOSE
+    fi
 }
 
 create_azdevops_service_connection(){
+    printInfo "3 - Creating Service Connection on Azure DevOps.\n" $VERBOSE
     SERVICE_CONNECTION_NAME=$(kubectl config view --minify -o jsonpath={.clusters[0].name})
 
     # Get parameters for curl request to Azure DevOps
@@ -57,7 +64,7 @@ create_azdevops_service_connection(){
     TOKEN=$(kubectl get secret $SECRET_NAME -n az-devops -o jsonpath="{.data.token}")
     CERTIFICATE_TOKEN=$(kubectl get secret $SECRET_NAME -n az-devops -o jsonpath="{.data.ca\.crt}")
 
-    curl -X POST \
+    RES=$(curl -L -w "%{http_code} %{url_effective}\\n" -X POST  \
     'https://dev.azure.com/'$ORGANIZATION_NAME'/'$PROJECT_NAME'/_apis/serviceendpoint/endpoints?api-version=5.1-preview.2' \
     -H 'cache-control: no-cache' \
     -H 'content-type: application/json' \
@@ -66,7 +73,7 @@ create_azdevops_service_connection(){
                 "data": {
                     "authorizationType": "ServiceAccount"
                 },
-                "name": "'$SERVICE_CONNECTION_NAME'",
+                "name": "'$SERVICE_CONNECTION_NAME'szsc",
                 "type": "kubernetes",
                 "url": "'$SERVER_URL'",
                 "description": "",
@@ -89,8 +96,12 @@ create_azdevops_service_connection(){
                         "description": ""
                     }
                 ]
-            }' 
+            }') 
+
+    printInfo "Response: \n$RES \n"
 }
+
+printInfo "Setting up Service Account connection to Azure DevOps...\n"
 
 create_kubernetes_roles
 create_service_account
