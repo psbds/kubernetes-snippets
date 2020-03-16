@@ -1,4 +1,4 @@
-# Setting Permissions to Azure DevOps
+# Create AzureDevOps Service Connections for Kubernetes
 
 On a AAD Integrated cluster, it's recommended to configure the service connection to the cluster using Service Accounts.
 
