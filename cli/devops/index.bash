@@ -3,20 +3,12 @@
 # Source: https://github.com/psbds/kubernetes-snippets
 set -e
 
-usage(){
-    echo "
-Creates a new Service Connection on Azure DevOps to connect to a Kubernetes Cluster
+local DIR="${BASH_SOURCE%/*}"
+if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
-See more at: $(printInfo https://github.com/psbds/kubernetes-snippets/tree/master/devops)
-
-Commands: 
-
-    create-service-connection                       Creates a Service Connection for Azure DevOps.
-"
-    exit
-}
+source $DIR/_help.bash
 
 case $1 in
     create-service-connection)  shift && load "devops/create-service-connection/index.bash" $@ ;;
-    *) usage ;;
+    *) usage  && exit ;;
 esac

@@ -25,8 +25,8 @@ There's also a autocomplete feature to make easier to use, if you're on Linux, j
 
 ### Available Commands
 
-* ```cluster``` - [Cluster Management Tools.](https://github.com/psbds/kubernetes-snippets/tree/master/cli/cluster)
-    * ```create``` - [Create an AKS Cluster.](https://github.com/psbds/kubernetes-snippets/tree/master/cli/cluster/create)
+* ```cluster``` - [Cluster Management Tools](https://github.com/psbds/kubernetes-snippets/tree/master/cli/cluster)
+    * ```create``` - [Create an AKS Cluster](https://github.com/psbds/kubernetes-snippets/tree/master/cli/cluster/create)
     
 * ```devops``` - [DevOps Utilities](https://github.com/psbds/kubernetes-snippets/tree/master/cli/devops)
     * ```create-service-connection``` - [Create Azure DevOps Service Connection](https://github.com/psbds/kubernetes-snippets/tree/master/cli/devops/create-service-connection)
