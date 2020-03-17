@@ -4,6 +4,12 @@ On a AAD Integrated cluster, it's recommended to configure the service connectio
 
 To do that you can follow those steps:
 
+## Setting up Service Connection (with Kubernetes Snippets CLI)
+
+You can use the cli provided in this repo to create the service connection through the Azure DevOps REST API.
+
+[Instructions Here](https://github.com/psbds/kubernetes-snippets/tree/master/cli/devops/create-service-connection) 
+
 ## Setting up Service Connection (Manually)
 
 ### Creating the Permissions
@@ -33,7 +39,6 @@ subjects:
     namespace: az-devops
 ```
 
-
 To setup on Azure DevOps, got to your Project Settings and then Service Connections. Create a new Service Connection and select the type = Kubernetes.
 
 Create the new namespace for the serviceaccount, the service account itself and get the configuration to input on Azure DevOps.
@@ -47,11 +52,7 @@ echo 'Your Server URL is: '$(kubectl config view --minify -o jsonpath={.clusters
 echo 'Your Secret File is:'
 echo $(kubectl get secret $SECRET_NAME -n az-devops -o json)
 ```
-## Setting up Service Connection (with Kubernetes Snippets CLI)
 
-You can also use the cli provided in this repo to create the service connection through the Azure DevOps REST API.
-
-[Instructions Here](https://github.com/psbds/kubernetes-snippets/tree/master/cli/devops/create-service-connection) 
 
 ## Setting up Service Connection (with Azure Pipelines)
 
