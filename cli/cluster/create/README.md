@@ -1,4 +1,4 @@
-## Kubernetes Snippets CLI (devops/create-service-connection)
+## Kubernetes Snippets CLI (cluster/create)
 
 Creates new AKS Cluster on Azure
 
@@ -34,3 +34,4 @@ akssnipets cluster create -n myAks -g myRg \\
 | -ng, --node-resource-group    | string    | MC_aksName_rgName_region  | no        | The node resource group is the resource group where all customer's resources will be created in, such as virtual machines.|
 | -v, --verbose                 |           |                           | no        | Increase logging verbosity.|
 | -h, --help                    |           |                           | no        | Show help message.|
+| --login                       | string    |                           | no        | Run get-credentials to get kubeconfig after cluster creation. Accepted Values: 'user' or 'admin'|

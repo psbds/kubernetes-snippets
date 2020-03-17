@@ -139,5 +139,15 @@ $COMMAND
 
 printInfo "Done.\n" $VERBOSE
 
-echo "To connect to your cluster as admin, run az aks get-credentials --resource-group $RESOURCE_GROUP --name $AKS_NAME --admin"
-echo "To connect to your cluster as user, run az aks get-credentials --resource-group $RESOURCE_GROUP --name $AKS_NAME"
+if [ -n $LOGIN -a $LOGIN == "admin" ]
+then
+    printInfo "Getting Credentials as Cluster Admin.\n" $VERBOSE
+    az aks get-credentials --resource-group $RESOURCE_GROUP --name $AKS_NAME --admin
+elif [ -n $LOGIN -a $LOGIN == "user" ]
+then
+    printInfo "Getting Credentials as Cluster User.\n" $VERBOSE
+    az aks get-credentials --resource-group $RESOURCE_GROUP --name $AKS_NAME
+else
+    echo "To connect to your cluster as admin, run az aks get-credentials --resource-group $RESOURCE_GROUP --name $AKS_NAME --admin"
+    echo "To connect to your cluster as user, run az aks get-credentials --resource-group $RESOURCE_GROUP --name $AKS_NAME"
+fi

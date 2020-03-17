@@ -39,6 +39,8 @@ while [ "$1" != "" ]; do
                                             ;;
         -ati | --aad-tenant-id )            shift && AAD_TENANT_ID=$1
                                             ;;
+        --login )                           shift && LOGIN=$1
+                                            ;;
         -h | --help )                       usage && exit
                                             ;;
         -v | --verbose )                    VERBOSE=1
@@ -53,6 +55,11 @@ validate_args(){
     validate_empty "$AKS_NAME"              "Argument -n, --name is required.\n"
     validate_empty "$RESOURCE_GROUP"        "Argument -g, --resource-group is required.\n"
     validate_empty "$SUBSCRIPTION"          "Argument -s, --subscription is required.\n"
+
+    if [ $LOGIN ]
+    then
+        validate_options "Argument --login \"$LOGIN\" is invalid.\n" $LOGIN "user" "admin"
+    fi
 
     if [ $VALID == 0 ]
     then

@@ -40,5 +40,6 @@ Arguments:
                                                     virtual machines.
     -h,     --help                                : Show this message and exit.
     -v,     --verbose                             : Increase logging verbosity.
+    --login                                       : Run get-credentials to get kubeconfig after cluster creation. Accepted Values: 'user' or 'admin'.
 "
 }

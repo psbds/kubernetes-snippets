@@ -31,3 +31,27 @@ validate_empty(){
         VALID=0
     fi
 }
+
+validate_options(){
+    VALID=0
+    MESSAGE=$1
+    SELECTED=$2
+    shift && shift
+    # $1 = Message
+    # $2 = Selected
+    # $@ = Options
+    for OPTION in "$@"
+    do
+        if [ $SELECTED == $OPTION ]
+        then
+            VALID=1
+            return
+        fi
+    done
+
+    if [ VALID=0 ]
+    then
+        printDanger "$MESSAGE"
+        VALID=0
+    fi
+}
