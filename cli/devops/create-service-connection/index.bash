@@ -4,9 +4,9 @@
 set -e
 
 # Loading an Validating Args
-DIR="${BASH_SOURCE%/*}"
+local DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
-source "$DIR/arguments.bash" 
+source "$DIR/_arguments.bash" 
 
 create_kubernetes_roles(){
   printInfo "1 - Creating Kubernetes Cluster Roles and Cluster Role Bindings\n" $VERBOSE

@@ -10,6 +10,8 @@ load 'helpers.bash'
 
 case $1 in
 devops) shift && load "devops/index.bash" $@ ;;
+cluster) shift && load "cluster/index.bash" $@ ;;
+
 #"-h") echo "dois" ;;
 #*) echo "Wrong Args" ;;
 esac

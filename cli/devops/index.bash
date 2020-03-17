@@ -1,13 +1,18 @@
 #/bin/bash
+# Author: Paulo Baima
+# Source: https://github.com/psbds/kubernetes-snippets
+set -e
 
 usage(){
-    echo '
-Kubernetes Snippets for DevOps. See more at: https://github.com/psbds/kubernetes-snippets/tree/master/devops
+    echo "
+Creates a new Service Connection on Azure DevOps to connect to a Kubernetes Cluster
 
-    Commands: 
+See more at: $(printInfo https://github.com/psbds/kubernetes-snippets/tree/master/devops)
 
-        create-service-connection                       Creates a Service Connection for Azure DevOps.
-    '
+Commands: 
+
+    create-service-connection                       Creates a Service Connection for Azure DevOps.
+"
     exit
 }
 
