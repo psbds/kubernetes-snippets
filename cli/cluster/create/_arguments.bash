@@ -14,7 +14,9 @@ VERBOSE=0
 MIN_NODES=1
 MAX_NODES=1
 LOCATION="eastus2"
-
+KUBERNETES_VERSION="1.16.4"
+VM_SIZE="Standard_DS2_v2"
+LOGIN=""
 while [ "$1" != "" ]; do
     case $1 in
         -n | --name )                       shift && AKS_NAME=$1
@@ -28,6 +30,10 @@ while [ "$1" != "" ]; do
         -min | --min-nodes )                shift && MIN_NODES=$1
                                             ;;
         -max | --max-nodes )                shift && MAX_NODES=$1
+                                            ;;
+        -vm | --vm-size )                   shift && VM_SIZE=$1
+                                            ;;
+        -k | --kubernetes-version )         shift && KUBERNETES_VERSION=$1
                                             ;;
         -ng | --node-resource-group )       shift && NODE_RESOURCE_GROUP=$1
                                             ;;
