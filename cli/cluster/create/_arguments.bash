@@ -60,7 +60,6 @@ validate_args(){
     VALID=1
     validate_empty "$AKS_NAME"              "Argument -n, --name is required.\n"
     validate_empty "$RESOURCE_GROUP"        "Argument -g, --resource-group is required.\n"
-    validate_empty "$SUBSCRIPTION"          "Argument -s, --subscription is required.\n"
 
     if [ $LOGIN ]
     then

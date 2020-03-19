@@ -92,7 +92,7 @@ fi
 COMMAND=" $COMMAND --service-cidr 10.0.0.0/16 --dns-service-ip 10.0.0.10 --docker-bridge-address 172.17.0.1/16"
 
 # Generate SSH Keys for the cluster VMs
-#COMMAND=" $COMMAND --generate-ssh-keys"
+COMMAND=" $COMMAND --generate-ssh-keys"
 
 
 printInfo "Creating AKS Cluster \"$AKS_NAME\":" $VERBOSE
