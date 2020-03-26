@@ -17,6 +17,7 @@ LOCATION="eastus2"
 KUBERNETES_VERSION="1.16.7"
 VM_SIZE="Standard_DS2_v2"
 LOGIN=""
+SUBSCRIPTION="$(az account show --query id -o tsv)"
 while [ "$1" != "" ]; do
     case $1 in
         -n | --name )                       shift && AKS_NAME=$1
