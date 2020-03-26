@@ -52,6 +52,10 @@ while [ "$1" != "" ]; do
                                             ;;
         -subnet  )                          shift && CUSTOM_SUBNET=$1
                                             ;;
+        -svc-cidr  )                        shift && CUSTOM_SVC_CIDR=$1
+                                            ;;
+        -svc-dns-ip )                       shift && CUSTOM_SVC_DNS_IP=$1
+                                            ;;                                     
         --login )                           shift && LOGIN=$1
                                             ;;
         -h | --help )                       usage && exit
@@ -73,7 +77,8 @@ validate_args(){
         validate_empty "$CUSTOM_VNET"              "Argument -vnet is required for a pre-created vnet.\n"
         validate_empty "$CUSTOM_VNET_RG"           "Argument -vnet-rg is required for a pre-created vnet.\n"
         validate_empty "$CUSTOM_SUBNET"            "Argument -subnet is required for a pre-created vnet.\n"
-
+        validate_empty "$CUSTOM_SVC_CIDR"          "Argument -svc-cidr is required for a pre-created vnet.\n"
+        validate_empty "$CUSTOM_SVC_DNS_IP"        "Argument -svc-dns-ip is required for a pre-created vnet.\n"
     fi
 
     if [ $LOGIN ]

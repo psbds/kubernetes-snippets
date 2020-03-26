@@ -89,7 +89,7 @@ fi
 
 ## Additional AKS Stuff
 # Kubernetes Virtual IP Configurations
-COMMAND=" $COMMAND --service-cidr 10.0.1.0/24 --dns-service-ip 10.0.1.5"
+COMMAND=" $COMMAND --service-cidr $CUSTOM_SVC_CIDR --dns-service-ip $CUSTOM_SVC_DNS_IP"
 
 # Generate SSH Keys for the cluster VMs
 COMMAND=" $COMMAND --generate-ssh-keys"

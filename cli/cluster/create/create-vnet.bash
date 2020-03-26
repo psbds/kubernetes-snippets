@@ -12,6 +12,8 @@ RESULT=$(az network vnet create \
     --query "newVNet.provisioningState")
 printInfo "$RESULT\n"
 
+CUSTOM_SVC_CIDR="10.0.0.0/16"
+CUSTOM_SVC_DNS_IP="10.0.0.10"
 VNET_ID=$(az network vnet show --resource-group $RESOURCE_GROUP --name $VNET_NAME --subscription $SUBSCRIPTION --query id -o tsv)
 SUBNET_ID=$(az network vnet subnet show --resource-group $RESOURCE_GROUP --vnet-name $VNET_NAME --subscription $SUBSCRIPTION --name defaultAKS --query id -o tsv)
 else

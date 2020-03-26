@@ -30,6 +30,11 @@ Arguments:
     -k,     --kubernetes-version                  : Version of Kubernetes to use for creating the
                                                     cluster, such as \"1.16.7\" or \"1.17.0\".  Values from:
                                                     \"az aks get-versions\"
+    -ng,    --node-resource-group                 : The node resource group is the resource group where
+                                                    all customer's resources will be created in, such as
+                                                    virtual machines.
+
+Authentication Arguments:                                                    
     -asai,  --aad-server-app-id                   : The ID of an Azure Active Directory server
                                                     application of type \"Web app/API\". This application
                                                     represents the managed cluster's apiserver (Server
@@ -40,9 +45,22 @@ Arguments:
                                                     application of type \"Native\". This application is
                                                     for user login via kubectl.
     -ati,   --aad-tenant-id                       : The ID of an Azure Active Directory tenant.
-    -ng,    --node-resource-group                 : The node resource group is the resource group where
-                                                    all customer's resources will be created in, such as
-                                                    virtual machines.
+
+Networking Arguments:
+    -vnet                                         : Name of the VNet where the cluster will exists. Leaving it blank creates a new VNET. 
+                                                    Use this parameter together with the `-vnet-rg` and `-subnet` parameters.
+    -vnet-rg                                      : Name of the resource group of the VNet where the cluster will exists. 
+                                                    Use this paremter parameter with the `-vnet` and `-subnet` parameters.
+    -subnet                                       : Name of the Subnet where the cluster will exists.
+                                                    Use this parameter together with the `-vnet-rg` and `-vnet` parameters.
+    -svc-cidr                                     : CIDR notation IP range from which to assign service cluster IPs. 
+                                                    This range must not overlap with any Subnet IP ranges. For example, `10.0.0.0/16`.  
+                                                    Use this parameter together with the vnet parameters.
+    -svc-dns-ip                                   : An IP address assigned to the Kubernetes DNS service. 
+                                                    This address must be within the Kubernetes service address range specified by \"--service-cidr\". For example, `10.0.0.10`. 
+                                                    Use this parameter together with the vnet parameters.
+                                                    
+Additional Arguments:
     -h,     --help                                : Show this message and exit.
     -v,     --verbose                             : Increase logging verbosity.
     --login                                       : Run get-credentials to get kubeconfig after cluster creation. Accepted Values: 'user' or 'admin'.
