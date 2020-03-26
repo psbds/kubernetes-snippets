@@ -1,7 +1,7 @@
 # Create a service principal and read in the application ID
 # SP=$(az ad sp create-for-rbac --name $SP_NAME --output json) # Use this one if you want to set the Service Principal name
 printInfo "Creating Service Principal: " $VERBOSE
-SP=$(az ad sp create-for-rbac --output json)
+SP=$(az ad sp create-for-rbac -n "AKS_SP_$AKS_NAME" --output json)
 SP_ID=$(echo $SP | jq -r .appId)
 SP_PASSWORD=$(echo $SP | jq -r .password)
 

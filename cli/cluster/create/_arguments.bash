@@ -14,7 +14,7 @@ VERBOSE=0
 MIN_NODES=1
 MAX_NODES=1
 LOCATION="eastus2"
-KUBERNETES_VERSION="1.16.4"
+KUBERNETES_VERSION="1.16.7"
 VM_SIZE="Standard_DS2_v2"
 LOGIN=""
 while [ "$1" != "" ]; do
@@ -45,6 +45,12 @@ while [ "$1" != "" ]; do
                                             ;;
         -ati | --aad-tenant-id )            shift && AAD_TENANT_ID=$1
                                             ;;
+        -vnet  )                            shift && CUSTOM_VNET=$1
+                                            ;;
+        -vnet-rg  )                         shift && CUSTOM_VNET_RG=$1
+                                            ;;
+        -subnet  )                          shift && CUSTOM_SUBNET=$1
+                                            ;;
         --login )                           shift && LOGIN=$1
                                             ;;
         -h | --help )                       usage && exit
@@ -60,6 +66,14 @@ validate_args(){
     VALID=1
     validate_empty "$AKS_NAME"              "Argument -n, --name is required.\n"
     validate_empty "$RESOURCE_GROUP"        "Argument -g, --resource-group is required.\n"
+
+    if [ -n "$CUSTOM_VNET" -o -n "$CUSTOM_VNET_RG" -o -n "$CUSTOM_SUBNET" ]
+    then
+        validate_empty "$CUSTOM_VNET"              "Argument -vnet is required for a pre-created vnet.\n"
+        validate_empty "$CUSTOM_VNET_RG"           "Argument -vnet-rg is required for a pre-created vnet.\n"
+        validate_empty "$CUSTOM_SUBNET"            "Argument -subnet is required for a pre-created vnet.\n"
+
+    fi
 
     if [ $LOGIN ]
     then

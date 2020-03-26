@@ -89,7 +89,7 @@ fi
 
 ## Additional AKS Stuff
 # Kubernetes Virtual IP Configurations
-COMMAND=" $COMMAND --service-cidr 10.0.0.0/16 --dns-service-ip 10.0.0.10 --docker-bridge-address 172.17.0.1/16"
+COMMAND=" $COMMAND --service-cidr 10.0.1.0/24 --dns-service-ip 10.0.1.5"
 
 # Generate SSH Keys for the cluster VMs
 COMMAND=" $COMMAND --generate-ssh-keys"

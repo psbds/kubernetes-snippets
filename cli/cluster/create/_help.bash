@@ -28,7 +28,7 @@ Arguments:
     -vm,    --vm-size                             : Size of Virtual Machines to create as Kubernetes
                                                     nodes.  Default: Standard_DS2_v2.
     -k,     --kubernetes-version                  : Version of Kubernetes to use for creating the
-                                                    cluster, such as \"1.16.4\" or \"1.17.0\".  Values from:
+                                                    cluster, such as \"1.16.7\" or \"1.17.0\".  Values from:
                                                     \"az aks get-versions\"
     -asai,  --aad-server-app-id                   : The ID of an Azure Active Directory server
                                                     application of type \"Web app/API\". This application
