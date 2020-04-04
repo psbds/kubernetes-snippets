@@ -1,7 +1,6 @@
 #/bin/bash
 # Authors: Paulo Baima & Vinicius Batista
-# This Script creates an Storage Account to serve as vault for velero Backup
-# You can check the detailed documentation here: https://github.com/vmware-tanzu/velero-plugin-for-microsoft-azure
+# Source: https://github.com/psbds/kubernetes-snippets
 set -e
 
 # Parameters

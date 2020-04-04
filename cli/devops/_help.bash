@@ -12,6 +12,10 @@ See more at: $(printInfo https://github.com/psbds/kubernetes-snippets/tree/maste
 Commands: 
 
     create-service-connection                       Creates a Service Connection for Azure DevOps.
+
+Arguments:
+
+    -h,     --help                                : Show this message and exit.
 "
     
 }

@@ -10,6 +10,10 @@ Commands:
 
     cluster                     Kubernetes Snippets for Cluster Management.
     devops                      DevOps utilities for Kubernetes.
+
+Arguments:
+
+    -h,     --help                                : Show this message and exit.
 "
     
 }
