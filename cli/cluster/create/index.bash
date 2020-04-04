@@ -30,22 +30,12 @@ RESULT=$(az group create --name $RESOURCE_GROUP --location $LOCATION --subscript
 printInfo "$RESULT\n" $VERBOSE
 
 ## Create the Virtual Network
-# In: $SUBSCRIPTION_ID
-# In: $RESOURCE_GROUP_NAME
-# In: $VNET_NAME
-# Out: $VNET_ID
-# Out: $SUBNET_ID
 source "$DIR/create-vnet.bash"
 
 ## Create Service Principal to Manage Cluster Resources
-# In: $SUBSCRIPTION_ID
-# In: $VNET_ID 
-# Out: SP_ID
-# Out: SP_PASSWORD
 source "$DIR/create-service-principal.bash"
 
-
-## Lets Create 'az aks create' command
+## Create 'az aks create' command
 COMMAND="az aks create"
 
 COMMAND="$COMMAND --name $AKS_NAME --resource-group $RESOURCE_GROUP --location $LOCATION"
@@ -62,6 +52,8 @@ COMMAND=" $COMMAND --enable-addons $ADDONS"
 COMMAND=" $COMMAND --network-policy $NETWORK_POLICY"
 COMMAND=" $COMMAND --tags source=kubernetes-snippets"
 COMMAND=" $COMMAND --nodepool-tags nodepool=kubernetes-snippets-default"
+COMMAND=" $COMMAND --service-cidr $CUSTOM_SVC_CIDR --dns-service-ip $CUSTOM_SVC_DNS_IP"
+COMMAND=" $COMMAND --generate-ssh-keys"
 
 if [ $CLUSTER_AUTOSCALER == 1 ]
 then
@@ -85,15 +77,6 @@ if [ -n "$NODE_RESOURCE_GROUP" ]
 then    
     COMMAND=" $COMMAND --node-resource-group $NODE_RESOURCE_GROUP"
 fi
-
-
-## Additional AKS Stuff
-# Kubernetes Virtual IP Configurations
-COMMAND=" $COMMAND --service-cidr $CUSTOM_SVC_CIDR --dns-service-ip $CUSTOM_SVC_DNS_IP"
-
-# Generate SSH Keys for the cluster VMs
-COMMAND=" $COMMAND --generate-ssh-keys"
-
 
 printInfo "Creating AKS Cluster \"$AKS_NAME\":" $VERBOSE
 
