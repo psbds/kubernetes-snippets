@@ -1,4 +1,4 @@
-FROM psbds/dev-container-aks:v1.1.3
+FROM psbds/dev-container-aks:v1.3.0
 
 
 RUN echo 'source /workspaces/$(ls /workspaces)/cli/autocomplete.bash' >> ~/.bashrc
