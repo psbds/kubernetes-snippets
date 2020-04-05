@@ -7,7 +7,7 @@ Backup Tools
 
 * ```create-velero-vault``` - Create a new Velero Vault to store/retrieve backups. [See Docs.](https://github.com/psbds/kubernetes-snippets/tree/master/cli/backup/create-velero-vault)
 * ```install-velero``` - Install velero crds on the cluster and configure the Velero Vault. [See Docs.](https://github.com/psbds/kubernetes-snippets/tree/master/cli/cluster/install-velero)
-* ```uninstall-velero``` - Remove all velero crds from the cluster [See Docs.](https://github.com/psbds/kubernetes-snippets/tree/master/cli/cluster/uninstall-velero)
+* ```uninstall-velero``` - Remove all velero crds from the cluster. [See Docs.](https://github.com/psbds/kubernetes-snippets/tree/master/cli/cluster/uninstall-velero)
 
 ### Arguments
 
