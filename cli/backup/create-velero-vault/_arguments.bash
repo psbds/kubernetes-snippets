@@ -26,8 +26,6 @@ while [ "$1" != "" ]; do
     shift
 done
 
-echo "$STORAGE_NAME"
-
 validate_args(){
     VALID=1
     validate_empty "$RESOURCE_GROUP"        "Argument -g, --resource-group is required.\n"

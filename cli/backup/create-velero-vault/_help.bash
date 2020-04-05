@@ -2,7 +2,7 @@ usage(){
     echo "
 Create a new Velero Vault to store/retrieve backups.
 
-See more at: $(printInfo https://github.com/psbds/kubernetes-snippets/tree/master/backup)
+See more at: $(printInfo https://github.com/psbds/kubernetes-snippets/tree/master/backup/create-velero-vault)
 
 Examples: 
 
