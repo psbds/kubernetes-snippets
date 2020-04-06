@@ -9,12 +9,13 @@ Creates new AKS Cluster on Azure
 akssnippets cluster create -n myAks -g myRg
 
 # Creates a AKS Cluster on Azure in a specific Subscription
-akssnippets cluster create -n myAks -g myRg -s abcdefgh-jklmnopq-rstuvw-xyz1
+akssnipets cluster create -n myAks -g myRg -s c684894a77c811eabc550242ac130003
 
 # Creates a AKS Cluster on Azure Integrated with Azure AAD
-akssnippets cluster create -n myAks -g myRg \\
-        --aad-server-app-id abcdefgh-jklmnopq-rstuvw-xyz1 --aad-server-app-secret abcdefgh-jklmnopq-rstuvw-xyz1 \\
-        --aad-client-app-id abcdefgh-jklmnopq-rstuvw-xyz1 --aad-tenant-id abcdefghjklmnopq
+# See: https://github.com/psbds/kubernetes-snippets/tree/master/kubernetes-permissions
+akssnipets cluster create -n myAks -g myRg \\
+        --aad-server-app-id 9f9f431077c811eabc550242ac130003 --aad-server-app-secret a678588477c811eabc550242ac130003 \\
+        --aad-client-app-id ad2fcacc77c811eabc550242ac130003 --aad-tenant-id b19762be77c811eabc550242ac130003
 ```
 
 ### Arguments
