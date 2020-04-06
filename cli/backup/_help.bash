@@ -1,6 +1,21 @@
 declare -A help
 
 help=( 
+    ["default"]="
+Kubernetes Snippets for Backup. 
+
+See more at: $(printInfo https://github.com/psbds/kubernetes-snippets/tree/master/backup)
+
+Commands: 
+
+    crate-velero-vault      Create a new Velero Vault to store/retrieve backups.
+    install-velero          Install velero crds on the cluster and configure the Velero Vault.
+    uninstall-velero        Remove all velero crds from the cluster.
+
+Arguments:
+
+    -h,     --help      : Show this message and exit.
+"
     ["uninstall-velero"]="
 Remove all velero crds from the cluster.
 

@@ -1,6 +1,20 @@
 declare -A help
 
 help=( 
+    ["default"]="
+Kubernetes Snippets for Cluster Management. 
+
+See more at: $(printInfo https://github.com/psbds/kubernetes-snippets/tree/master/cluster)
+
+Commands: 
+
+    create      Creates a AKS Cluster on Azure.
+
+Arguments:
+
+    -h, --help      : Show this message and exit.
+"
+
     ["create"]="
 Creates new AKS Cluster on Azure
 
@@ -27,6 +41,7 @@ Arguments:
                                                   cluster, such as \"1.16.7\" or \"1.17.0\".  Values from:
                                                   \"az aks get-versions\"
     -l,     --location                          : Location. Values from: \"az account list-locations\".
+    --login                                     : Run get-credentials to get kubeconfig after cluster creation. Accepted Values: 'user' or 'admin'.
     -max,   --max-nodes                         : Maximum number of nodes for the default node pool.
     -min,   --min-nodes                         : Minimum number of nodes for the default node pool.
     -ng,    --node-resource-group               : The node resource group is the resource group where
@@ -65,7 +80,6 @@ Networking Arguments:
 Additional Arguments:
     -h,     --help                                : Show this message and exit.
     -v,     --verbose                             : Increase logging verbosity.
-    --login                                       : Run get-credentials to get kubeconfig after cluster creation. Accepted Values: 'user' or 'admin'.
 ")
 
 usage(){
