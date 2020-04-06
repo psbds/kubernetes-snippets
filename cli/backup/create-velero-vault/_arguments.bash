@@ -6,12 +6,13 @@ source $DIR/../_help.bash
 
 # Default Args
 {
-VERBOSE=0
-CONTAINER="velero-backup"
-SUBSCRIPTION="$(az account show --query id -o tsv)"
-LOCATION="GRS"
-STORAGE_NAME="velero$(uuidgen | cut -d '-' -f5 | tr '[A-Z]' '[a-z]')"
+    VERBOSE=0
+    CONTAINER="velero-backup"
+    SUBSCRIPTION="$(az account show --query id -o tsv)"
+    LOCATION="GRS"
+    STORAGE_NAME="velero$(uuidgen | cut -d '-' -f5 | tr '[A-Z]' '[a-z]')"
 }
+
 arguments=( 
     "-g|--resource-group:RESOURCE_GROUP"
     "-c|--container:CONTAINER"

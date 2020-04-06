@@ -8,7 +8,7 @@ See more at: $(printInfo https://github.com/psbds/kubernetes-snippets/tree/maste
 
 Examples: 
 
-    # Create the velero Vault
+    # Remove all velero crds from the cluster.
     akssnippets backup uninstall-velero
     
 Additional Arguments:

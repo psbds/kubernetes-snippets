@@ -76,7 +76,6 @@ read_args(){
         fi
     done
     cmd="$cmd esac ; shift"
-    echo -e $cmd
     
     while [ "$1" != "" ]; do
         eval "$cmd"
