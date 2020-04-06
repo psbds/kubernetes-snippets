@@ -3,7 +3,7 @@
 # Source: https://github.com/psbds/kubernetes-snippets
 DIR="${BASH_SOURCE%/*}" ; if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
-#source $DIR/_help.bash
+source $DIR/_help.bash
 
 # Default Args
 VERBOSE=0
