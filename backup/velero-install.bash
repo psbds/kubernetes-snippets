@@ -46,8 +46,8 @@ EOF
 # Install Velero Plugin
 velero install \
     --provider azure \
-    --plugins velero/velero-plugin-for-microsoft-azure:v1.0.0 \
-    --bucket $AZURE_BACKUP_CONTAINER'' \
+    --plugins velero/velero-plugin-for-microsoft-azure:v1.0.1 \
+    --bucket "$AZURE_BACKUP_CONTAINER" \
     --secret-file ./credentials-velero \
     --backup-location-config resourceGroup=$AZURE_BACKUP_RESOURCE_GROUP,storageAccount=$AZURE_BACKUP_STORAGE_ACCOUNT_ID,subscriptionId=$AZURE_BACKUP_SUBSCRIPTION \
     --snapshot-location-config apiTimeout=5m,resourceGroup=$AZURE_BACKUP_RESOURCE_GROUP,subscriptionId=$AZURE_BACKUP_SUBSCRIPTION

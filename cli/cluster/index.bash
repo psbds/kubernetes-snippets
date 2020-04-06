@@ -12,6 +12,10 @@ See more at: $(printInfo https://github.com/psbds/kubernetes-snippets/tree/maste
 Commands: 
 
     create                       Creates a AKS Cluster on Azure.
+
+Arguments:
+
+    -h,     --help                                : Show this message and exit.
 "
     exit
 }

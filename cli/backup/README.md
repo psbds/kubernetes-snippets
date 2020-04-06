@@ -1,3 +1,23 @@
+## Kubernetes Snippets CLI (cluster)
+
+Backup Tools
+
+### Commands
+
+
+* ```create-velero-vault``` - Create a new Velero Vault to store/retrieve backups. [See Docs.](https://github.com/psbds/kubernetes-snippets/tree/master/cli/backup/create-velero-vault)
+* ```install-velero``` - Install velero crds on the cluster and configure the Velero Vault. [See Docs.](https://github.com/psbds/kubernetes-snippets/tree/master/cli/cluster/install-velero)
+* ```uninstall-velero``` - Remove all velero crds from the cluster. [See Docs.](https://github.com/psbds/kubernetes-snippets/tree/master/cli/cluster/uninstall-velero)
+
+### Arguments
+
+| Arguments 	                | Type      | Default                   | Required  | Description 	|
+|-----------	                |------     |---------                  |--------   |-------------	|
+| -h, --help                    |           |                           | no        | Show help message.|
+
+
+### Velero
+
 # Backup & Migrate Clusters using Velero
 
 Velero is an open source tool to safely backup and restore, perform disaster recovery, and migrate Kubernetes cluster resources and persistent volumes.
