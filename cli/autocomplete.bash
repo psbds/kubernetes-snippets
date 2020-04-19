@@ -16,7 +16,7 @@ _foo()
         2)
             case ${L2} in
                 cluster)
-                    COMPREPLY=($(compgen -W "create " -- ${cur}))
+                    COMPREPLY=($(compgen -W "create create-aad-credentials " -- ${cur}))
                     ;;
                 devops)
                     COMPREPLY=($(compgen -W "create-service-connection " -- ${cur}))
