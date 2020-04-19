@@ -11,7 +11,8 @@ See more at: $(printInfo https://github.com/psbds/kubernetes-snippets/tree/maste
 
 Commands: 
 
-    create      Creates a AKS Cluster on Azure.
+    create                      Creates a AKS Cluster on Azure.
+    create-aad-credentials      Creates the credentials on Azure Active Directory to integrate AKS with AAD Authentication.
 
 Arguments:
 
@@ -33,8 +34,8 @@ Examples:
 
     # Creates a AKS Cluster on Azure Integrated with Azure AAD
     # See: https://github.com/psbds/kubernetes-snippets/tree/master/kubernetes-permissions
-    akssnipets cluster create -n myAks -g myRg \\
-            --aad-server-app-id 9f9f431077c811eabc550242ac130003 --aad-server-app-secret a678588477c811eabc550242ac130003 \\
+    akssnipets cluster create -n myAks -g myRg \
+            --aad-server-app-id 9f9f431077c811eabc550242ac130003 --aad-server-app-secret a678588477c811eabc550242ac130003 \
             --aad-client-app-id ad2fcacc77c811eabc550242ac130003 --aad-tenant-id b19762be77c811eabc550242ac130003
 
 Arguments:
@@ -83,6 +84,24 @@ Networking Arguments:
 Additional Arguments:
     -h,     --help                                : Show this message and exit.
     -v,     --verbose                             : Increase logging verbosity.
+"
+
+ ["create-aad-credentials"]="
+Creates the credentials on Azure Active Directory to integrate AKS with AAD Authentication.
+
+See more at: $(printInfo https://github.com/psbds/kubernetes-snippets/tree/master/cluster)
+
+Examples: 
+
+    # Creates the credentials on Azure Active Directory to integrate AKS with AAD Authentication 
+    akssnippets cluster create-aad-credentials -n credentialname
+
+Arguments:
+    -n,     --name      [Required]  : Name the Service Principal that will be created.
+    
+Additional Arguments:
+    -h,     --help                  : Show this message and exit.
+    -v,     --verbose               : Increase logging verbosity.
 ")
 
 usage(){
