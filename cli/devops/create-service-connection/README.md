@@ -1,6 +1,10 @@
 ## Kubernetes Snippets CLI (devops/create-service-connection)
 
-Creates a new Service Connection on Azure DevOps to connect to a Kubernetes Cluster
+Creates a new Service Connection on Azure DevOps to connect to a Kubernetes Cluster.
+
+
+This script creates a ClusteRole and ClsuteRoleBinding with full permissions on the cluster so Azure DevOps can do the deployment of anything, you can refine to have a more granular and secure set of permission, editing the file `cli/devops/create-serviceconnection/index.bash`
+
 
 ### Usage
 

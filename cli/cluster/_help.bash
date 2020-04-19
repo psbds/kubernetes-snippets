@@ -1,3 +1,6 @@
+#/bin/bash
+# Author: Paulo Baima
+# Source: https://github.com/psbds/kubernetes-snippets
 declare -A help
 
 help=( 

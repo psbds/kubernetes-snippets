@@ -1,21 +1,42 @@
 #/bin/bash
 # Author: Paulo Baima
 # Source: https://github.com/psbds/kubernetes-snippets
-set -e
+declare -A help
 
-usage(){
-    echo "
+help=( 
+    ["default"]="
 DevOps utilities for Kubernetes.
 
 See more at: $(printInfo https://github.com/psbds/kubernetes-snippets/tree/master/devops)
 
 Commands: 
 
-    create-service-connection                       Creates a Service Connection for Azure DevOps.
+    create-service-connection       Creates a Service Connection for Azure DevOps.
 
 Arguments:
 
-    -h,     --help                                : Show this message and exit.
+    -h, --help      : Show this message and exit.
 "
-    
+    ["create-service-connection"]="
+Creates a new Service Connection on Azure DevOps to connect to a Kubernetes Cluster
+
+See more at: $(printInfo https://github.com/psbds/kubernetes-snippets/tree/master/devops)
+
+Examples: 
+
+    # Create the Service Connection on Azure DevOps
+    akssnipets devops create-service-connection -o contosoOrganization -p constosoProject -pat patToken -u user
+
+Arguments:
+    -o,     --organization           [Required]   : The Azure DevOps organization where the service connection will be created.    
+    -p,     --project                [Required]   : The Azure DevOps project where the service connection will be bound. 
+    -pat,   --personal-access-token  [Required]   : The Personal Access Token of an user with access to create service connection.
+    -u,     --user                   [Required]   : The email of the user owner of the PAT token.   
+    -h,     --help                                : Show this message and exit.
+    -v,     --verbose                             : Increase logging verbosity.
+"
+)
+
+usage(){
+    echo "${help[$1]}"
 }
