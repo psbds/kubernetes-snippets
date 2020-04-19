@@ -1,11 +1,7 @@
 #/bin/bash
 # Author: Paulo Baima
-# This Script creates a AKS Cluster with the defined parameters
-# Fist, run 'az login' to login into your account
-set -e
-
-DIR="${BASH_SOURCE%/*}"
-if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
+# Source: https://github.com/psbds/kubernetes-snippets
+DIR="${BASH_SOURCE%/*}" ; if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
 source "$DIR/_arguments.bash" 
 
@@ -13,14 +9,6 @@ source "$DIR/_arguments.bash"
 
 ## The Name of the VNET that will be created
 VNET_NAME=$AKS_NAME"-vnet"
-
-NETWORK_POLICY="azure"
-NETWORK_PLUGIN="azure"
-ADDONS="monitoring"
-OS_DISK_SIZE=100
-LOAD_BALANCER_SKU="Standard"
-LOAD_BALANCER_OUTBOUND_IPS=2
-CLUSTER_AUTOSCALER=1
 
 # End of Parameters
 

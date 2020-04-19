@@ -1,72 +1,53 @@
 #/bin/bash
 # Author: Paulo Baima
 # Source: https://github.com/psbds/kubernetes-snippets
-set -e
-
-DIR="${BASH_SOURCE%/*}"
-if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
-
-source $DIR/_help.bash
-
 
 # Default Args
-VERBOSE=0
-MIN_NODES=1
-MAX_NODES=1
-LOCATION="eastus2"
-KUBERNETES_VERSION="1.16.7"
-VM_SIZE="Standard_DS2_v2"
-LOGIN=""
-SUBSCRIPTION="$(az account show --query id -o tsv)"
+{
+    VERBOSE=0
+    MIN_NODES=1
+    MAX_NODES=1
+    LOCATION="eastus2"
+    KUBERNETES_VERSION="1.16.7"
+    VM_SIZE="Standard_DS2_v2"
+    LOGIN=""
+    SUBSCRIPTION="$(az account show --query id -o tsv)"
+   
+    # Fixed Arguments
+    NETWORK_POLICY="azure"
+    NETWORK_PLUGIN="azure"
+    ADDONS="monitoring"
+    OS_DISK_SIZE=100
+    LOAD_BALANCER_SKU="Standard"
+    LOAD_BALANCER_OUTBOUND_IPS=2
+    CLUSTER_AUTOSCALER=1
+}
 
-while [ "$1" != "" ]; do
-    case $1 in
-        -n | --name )                       shift && AKS_NAME=$1
-                                            ;;
-        -g | --resource-group )             shift && RESOURCE_GROUP=$1
-                                            ;;
-        -s | --subscription )               shift && SUBSCRIPTION=$1
-                                            ;;
-        -l | --location )                   shift && LOCATION=$1
-                                            ;;
-        -min | --min-nodes )                shift && MIN_NODES=$1
-                                            ;;
-        -max | --max-nodes )                shift && MAX_NODES=$1
-                                            ;;
-        -vm | --vm-size )                   shift && VM_SIZE=$1
-                                            ;;
-        -k | --kubernetes-version )         shift && KUBERNETES_VERSION=$1
-                                            ;;
-        -ng | --node-resource-group )       shift && NODE_RESOURCE_GROUP=$1
-                                            ;;
-        -asai | --aad-server-app-id )       shift && AAD_SERVER_APPLICATION_ID=$1
-                                            ;;
-        -asas | --aad-server-app-secret )   shift && AAD_SERVER_APPLICATION_SECRET=$1
-                                            ;;
-        -acai | --aad-client-app-id )       shift && AAD_CLIENT_APPLICATION_ID=$1
-                                            ;;
-        -ati | --aad-tenant-id )            shift && AAD_TENANT_ID=$1
-                                            ;;
-        -vnet  )                            shift && CUSTOM_VNET=$1
-                                            ;;
-        -vnet-rg  )                         shift && CUSTOM_VNET_RG=$1
-                                            ;;
-        -subnet  )                          shift && CUSTOM_SUBNET=$1
-                                            ;;
-        -svc-cidr  )                        shift && CUSTOM_SVC_CIDR=$1
-                                            ;;
-        -svc-dns-ip )                       shift && CUSTOM_SVC_DNS_IP=$1
-                                            ;;                                     
-        --login )                           shift && LOGIN=$1
-                                            ;;
-        -h | --help )                       usage && exit
-                                            ;;
-        -v | --verbose )                    VERBOSE=1
-                                            ;;
-    esac
-    shift
-done
+arguments=( 
+    "-n|--name:AKS_NAME"
+    "-g|--resource-group:RESOURCE_GROUP"
+    "-s|--subscription:SUBSCRIPTION"
+    "-l|--location:LOCATION"
+    "-min|--min-nodes:MIN_NODES"
+    "-max|--max-nodes:MAX_NODES"
+    "-vm|--vm-size:VM_SIZE"
+    "-k|--kubernetes-version:KUBERNETES_VERSION"
+    "-ng|--node-resource-group:NODE_RESOURCE_GROUP"
+    "-asai|--aad-server-app-id:AAD_SERVER_APPLICATION_ID"
+    "-asas|--aad-server-app-secret:AAD_SERVER_APPLICATION_SECRET"
+    "-acai|--aad-client-app-id:AAD_CLIENT_APPLICATION_ID"
+    "-ati|--aad-tenant-id:AAD_TENANT_ID"
+    "-vnet:CUSTOM_VNET"
+    "-vnet-rg:CUSTOM_VNET_RG"
+    "-subnet:CUSTOM_SUBNET"
+    "-svc-cidr:CUSTOM_SVC_CIDR"
+    "-svc-dns-ip:CUSTOM_SVC_DNS_IP"
+    "--login:LOGIN"
+    "-h|--help:create"
+    "-v|--verbose" )
 
+# Source: cli/helpers.bash
+read_args arguments $@
 
 validate_args(){
     VALID=1
@@ -87,10 +68,7 @@ validate_args(){
         validate_options "Argument --login \"$LOGIN\" is invalid.\n" $LOGIN "user" "admin"
     fi
 
-    if [ $VALID == 0 ]
-    then
-        exit 1;
-    fi    
+    if [ $VALID == 0 ]; then exit 1; fi
 }
 
 validate_args

@@ -10,7 +10,7 @@ Feel free to create an issue or PR to contribute, and why not have a chat on [Li
 
 * [Running Scripts from this Repository](https://github.com/psbds/kubernetes-snippets/blob/master/.devcontainer/README.md)
 * [Kubernetes Permissions](https://github.com/psbds/kubernetes-snippets/tree/master/kubernetes-permissions)
-* [Kubernetes Backup & Migration with Velero](https://github.com/psbds/kubernetes-snippets/tree/master/backup)
+* [Kubernetes Backup & Migration with Velero](https://github.com/psbds/kubernetes-snippets/tree/master/cli/backup)
 * Azure DevOps
     * [Setting Up Service Connections for Kubernetes](https://github.com/psbds/kubernetes-snippets/tree/master/devops/service-connection-setup)
 
