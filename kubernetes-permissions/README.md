@@ -4,18 +4,6 @@ The samples shows how to create Cluster Roles on a Kubernetes Cluster
 
 Please see the full Documentation here: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
 
-
-
-## AAD Integration
-
-Without the AAD integration, all users with owner/contributor permission to the AKS resource will have **full permissions in the cluster**, and will not be able to differ from one another.
-
-To manage user permission using email or AAD groups, you need to setup [AAD Integration](https://docs.microsoft.com/en-us/azure/aks/kubernetes-service-principal).
-
-I've also created a helper script to create the AAD Integration [here](https://github.com/psbds/kubernetes-snippets/blob/master/kubernetes-permissions/setup-aad-connection.bash)
-
-**Not that to create this integration, you need admin rights in Azure Active Directory.**
-
 ## Role Types
 On Kubernetes, there's to types of Roles
 
