@@ -14,7 +14,7 @@ I've configured a custom docker image do run the scripts from this help, you can
 ## Using VSCode and the Remote Containers Extension (BEST EXTENSION EVER)
 
 ## Requirements
-<img src="https://github.com/psbds/kubernetes-snippets/raw/master/doc-images/docker.png" height="100px" /> <img src="https://github.com/psbds/kubernetes-snippets/raw/master/doc-images/vscode.png" height="100px" />
+<img src="./doc/assets/docker.png" height="100px" /> <img src="./doc/assets/vscode.png" height="100px" />
 
 * Docker Installed and Running (and set to use Linux Containers)
   * Install Docker on Windows (https://docs.docker.com/docker-for-windows/install/)
