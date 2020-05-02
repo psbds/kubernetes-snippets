@@ -11,15 +11,18 @@ _foo()
 
     case ${COMP_CWORD} in
         1)
-            COMPREPLY=($(compgen -W "cluster devops " -- ${cur}))
+            COMPREPLY=($(compgen -W "cluster devops backup" -- ${cur}))
             ;;
         2)
             case ${L2} in
                 cluster)
-                    COMPREPLY=($(compgen -W "create " -- ${cur}))
+                    COMPREPLY=($(compgen -W "create create-aad-credentials " -- ${cur}))
                     ;;
                 devops)
                     COMPREPLY=($(compgen -W "create-service-connection " -- ${cur}))
+                    ;;
+                backup)
+                    COMPREPLY=($(compgen -W "create-velero-vault install-velero uninstall-velero " -- ${cur}))
                     ;;
             esac
             ;;

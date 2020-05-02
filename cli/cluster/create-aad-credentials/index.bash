@@ -1,11 +1,14 @@
 #/bin/bash
-AKS_NAME="padasil-aks-rbac"
+# Author: Paulo Baima
+# Source: https://github.com/psbds/kubernetes-snippets
+DIR="${BASH_SOURCE%/*}" ; if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
-echo ${AKS_NAME}
+source "$DIR/_arguments.bash" 
+
 # Create the Azure AD application
 serverApplicationId=$(az ad app create \
-    --display-name "${AKS_NAME}Server" \
-    --identifier-uris "https://${AKS_NAME}Server" \
+    --display-name "${SP_NAME}Server" \
+    --identifier-uris "https://${SP_NAME}Server" \
     --query appId -o tsv)
 
 # Update the application group memebership claims
@@ -29,9 +32,9 @@ az ad app permission grant --id $serverApplicationId --api 00000003-0000-0000-c0
 az ad app permission admin-consent --id  $serverApplicationId
 
 clientApplicationId=$(az ad app create \
-    --display-name "${AKS_NAME}Client" \
+    --display-name "${SP_NAME}Client" \
     --native-app \
-    --reply-urls "https://${AKS_NAME}Client" \
+    --reply-urls "https://${SP_NAME}Client" \
     --query appId -o tsv)
 
 az ad sp create --id $clientApplicationId
@@ -47,3 +50,10 @@ echo "ServerApplicationId: $serverApplicationId"
 echo "ServerApplicationSecret: $serverApplicationSecret"
 echo "Client ApplicationId: $clientApplicationId"
 echo "Tenant Id: $tenantId"
+
+echo "You can create your integrated cluster using the following command:
+
+akssnipets cluster create -n myAks -g myRg \
+    --aad-server-app-id $serverApplicationId --aad-server-app-secret $serverApplicationSecret \
+    --aad-client-app-id $clientApplicationId --aad-tenant-id $tenantId
+"
